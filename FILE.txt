@@ -1,0 +1,32 @@
+
+3. **Buka file `index.html`** di browser web modern
+
+## 📋 Alur Penggunaan
+
+1. **Login** - Pengguna memasukkan email dan password
+2. **Biodata** - Mengisi data pribadi lengkap dengan validasi
+3. **Survey** - Menjawab 5 pertanyaan tentang lingkungan sekolah
+4. **Konfirmasi** - Mengunduh file .exe dan menghubungi via WhatsApp
+
+## 🛠️ Teknologi yang Digunakan
+
+- **HTML5** - Struktur website
+- **CSS3** - Styling dengan CSS Variables dan Flexbox/Grid
+- **Vanilla JavaScript** - Interaktivitas dan validasi form
+- **Font Awesome** - Ikon dan UI elements
+- **Google Fonts** - Typography
+
+## 📱 Responsivitas
+
+Situs ini telah dioptimalkan untuk:
+- ✅ Desktop (1024px+)
+- ✅ Tablet (768px - 1023px)
+- ✅ Mobile (320px - 767px)
+
+## 🔧 Konfigurasi
+
+### Mengubah Nomor WhatsApp
+Edit file `js/script.js` pada bagian:
+```javascript
+// Di function updateWhatsAppLink()
+const whatsappLink = `https://wa.me/6281264656570?text=${encodedMessage}`;
