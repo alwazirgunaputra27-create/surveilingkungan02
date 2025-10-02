@@ -4,8 +4,333 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Survey Lingkungan Nasional Sekolah - Kemendikdasmen</title>
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --primary-dark: #0d47a1;
+            --secondary: #34a853;
+            --light: #f8f9fa;
+            --dark: #202124;
+            --gray: #5f6368;
+            --error: #ea4335;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 20px 0;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo i {
+            font-size: 40px;
+            color: var(--primary);
+        }
+        
+        .header-text {
+            text-align: center;
+        }
+        
+        .header-text h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        
+        .header-text p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .card-header h2 {
+            color: var(--primary);
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        
+        .card-header p {
+            color: var(--gray);
+            font-size: 16px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(to right, var(--primary-dark), var(--primary));
+            box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(to right, var(--secondary), #2e7d32);
+        }
+        
+        .btn-secondary:hover {
+            background: linear-gradient(to right, #2e7d32, var(--secondary));
+            box-shadow: 0 4px 12px rgba(52, 168, 83, 0.3);
+        }
+        
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .step {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+            font-weight: bold;
+            color: var(--gray);
+            transition: all 0.3s ease;
+        }
+        
+        .step.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .step.completed {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .step-line {
+            flex: 1;
+            height: 4px;
+            background-color: #e0e0e0;
+            margin: 0 5px;
+            align-self: center;
+            transition: all 0.3s ease;
+        }
+        
+        .step-line.completed {
+            background-color: var(--secondary);
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .survey-question {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .survey-question:last-child {
+            border-bottom: none;
+        }
+        
+        .survey-question h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .rating-scale {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        
+        .rating-option {
+            text-align: center;
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .rating-option:hover {
+            background-color: #f1f8ff;
+            border-color: var(--primary);
+        }
+        
+        .rating-option.selected {
+            background-color: #e8f0fe;
+            border-color: var(--primary);
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .success-message {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .success-icon {
+            font-size: 80px;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--gray);
+            font-size: 14px;
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+        }
+        
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #25D366;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        }
+        
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
+        }
+        
+        .whatsapp-btn i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        .download-section {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f1f8ff;
+            border-radius: 12px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .rating-scale {
+                flex-direction: column;
+            }
+            
+            .rating-option {
+                margin: 5px 0;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -35,7 +360,7 @@
         </div>
         
         <!-- Login Page -->
-        <div id="login-page" class="card">
+        <div id="login-page" class="card hidden">
             <div class="card-header">
                 <h2>Masuk ke Akun Anda</h2>
                 <p>Gunakan akun Google untuk mengisi survey</p>
@@ -49,12 +374,12 @@
                 <input type="password" id="password" placeholder="Masukkan kata sandi Anda">
             </div>
             <div class="form-group">
-                <button class="btn" id="login-btn">Selanjutnya</button>
+                <button class="btn" onclick="nextStep('login-page', 'biodata-page')">Selanjutnya</button>
             </div>
-            <div class="social-login">
+            <div style="text-align: center; margin-top: 20px;">
                 <p>Atau masuk dengan</p>
-                <div class="social-buttons">
-                    <div class="social-btn google" id="google-login">
+                <div style="display: flex; justify-content: center; gap: 15px; margin-top: 15px;">
+                    <div style="width: 40px; height: 40px; background: #EA4335; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer;">
                         <i class="fab fa-google"></i>
                     </div>
                 </div>
@@ -70,35 +395,29 @@
             <div class="form-group">
                 <label for="nik">NIK (Nomor Induk Kependudukan)</label>
                 <input type="text" id="nik" placeholder="Masukkan NIK Anda">
-                <span class="error-message" id="nik-error"></span>
             </div>
             <div class="form-group">
                 <label for="nama">Nama Lengkap</label>
                 <input type="text" id="nama" placeholder="Masukkan nama lengkap Anda">
-                <span class="error-message" id="nama-error"></span>
             </div>
             <div class="form-group">
                 <label for="tempat-lahir">Tempat Lahir</label>
                 <input type="text" id="tempat-lahir" placeholder="Masukkan tempat lahir Anda">
-                <span class="error-message" id="tempat-lahir-error"></span>
             </div>
             <div class="form-group">
                 <label for="tanggal-lahir">Tanggal Lahir</label>
                 <input type="date" id="tanggal-lahir">
-                <span class="error-message" id="tanggal-lahir-error"></span>
             </div>
             <div class="form-group">
                 <label for="instansi">Instansi Bertugas</label>
                 <input type="text" id="instansi" placeholder="Masukkan instansi tempat bertugas">
-                <span class="error-message" id="instansi-error"></span>
             </div>
             <div class="form-group">
                 <label for="npwp">NPWP (Nomor Pokok Wajib Pajak)</label>
                 <input type="text" id="npwp" placeholder="Masukkan NPWP Anda">
-                <span class="error-message" id="npwp-error"></span>
             </div>
             <div class="form-group">
-                <button class="btn" id="biodata-btn">Selanjutnya</button>
+                <button class="btn" onclick="nextStep('biodata-page', 'survey-page')">Selanjutnya</button>
             </div>
         </div>
         
@@ -112,55 +431,55 @@
             <div class="survey-question">
                 <h3>1. Bagaimana kondisi kebersihan lingkungan sekolah?</h3>
                 <div class="rating-scale">
-                    <div class="rating-option" data-value="1">Sangat Buruk</div>
-                    <div class="rating-option" data-value="2">Buruk</div>
-                    <div class="rating-option" data-value="3">Cukup</div>
-                    <div class="rating-option" data-value="4">Baik</div>
-                    <div class="rating-option" data-value="5">Sangat Baik</div>
+                    <div class="rating-option" onclick="selectRating(this)">Sangat Buruk</div>
+                    <div class="rating-option" onclick="selectRating(this)">Buruk</div>
+                    <div class="rating-option" onclick="selectRating(this)">Cukup</div>
+                    <div class="rating-option" onclick="selectRating(this)">Baik</div>
+                    <div class="rating-option" onclick="selectRating(this)">Sangat Baik</div>
                 </div>
             </div>
             
             <div class="survey-question">
                 <h3>2. Seberapa memadai fasilitas sanitasi (toilet, wastafel) di sekolah?</h3>
                 <div class="rating-scale">
-                    <div class="rating-option" data-value="1">Sangat Tidak Memadai</div>
-                    <div class="rating-option" data-value="2">Tidak Memadai</div>
-                    <div class="rating-option" data-value="3">Cukup Memadai</div>
-                    <div class="rating-option" data-value="4">Memadai</div>
-                    <div class="rating-option" data-value="5">Sangat Memadai</div>
+                    <div class="rating-option" onclick="selectRating(this)">Sangat Tidak Memadai</div>
+                    <div class="rating-option" onclick="selectRating(this)">Tidak Memadai</div>
+                    <div class="rating-option" onclick="selectRating(this)">Cukup Memadai</div>
+                    <div class="rating-option" onclick="selectRating(this)">Memadai</div>
+                    <div class="rating-option" onclick="selectRating(this)">Sangat Memadai</div>
                 </div>
             </div>
             
             <div class="survey-question">
                 <h3>3. Bagaimana kualitas udara di lingkungan sekolah?</h3>
                 <div class="rating-scale">
-                    <div class="rating-option" data-value="1">Sangat Buruk</div>
-                    <div class="rating-option" data-value="2">Buruk</div>
-                    <div class="rating-option" data-value="3">Cukup</div>
-                    <div class="rating-option" data-value="4">Baik</div>
-                    <div class="rating-option" data-value="5">Sangat Baik</div>
+                    <div class="rating-option" onclick="selectRating(this)">Sangat Buruk</div>
+                    <div class="rating-option" onclick="selectRating(this)">Buruk</div>
+                    <div class="rating-option" onclick="selectRating(this)">Cukup</div>
+                    <div class="rating-option" onclick="selectRating(this)">Baik</div>
+                    <div class="rating-option" onclick="selectRating(this)">Sangat Baik</div>
                 </div>
             </div>
             
             <div class="survey-question">
                 <h3>4. Seberapa baik pengelolaan sampah di sekolah?</h3>
                 <div class="rating-scale">
-                    <div class="rating-option" data-value="1">Sangat Buruk</div>
-                    <div class="rating-option" data-value="2">Buruk</div>
-                    <div class="rating-option" data-value="3">Cukup</div>
-                    <div class="rating-option" data-value="4">Baik</div>
-                    <div class="rating-option" data-value="5">Sangat Baik</div>
+                    <div class="rating-option" onclick="selectRating(this)">Sangat Buruk</div>
+                    <div class="rating-option" onclick="selectRating(this)">Buruk</div>
+                    <div class="rating-option" onclick="selectRating(this)">Cukup</div>
+                    <div class="rating-option" onclick="selectRating(this)">Baik</div>
+                    <div class="rating-option" onclick="selectRating(this)">Sangat Baik</div>
                 </div>
             </div>
             
             <div class="survey-question">
                 <h3>5. Bagaimana ketersediaan dan kondisi taman/ruang terbuka hijau?</h3>
                 <div class="rating-scale">
-                    <div class="rating-option" data-value="1">Sangat Buruk</div>
-                    <div class="rating-option" data-value="2">Buruk</div>
-                    <div class="rating-option" data-value="3">Cukup</div>
-                    <div class="rating-option" data-value="4">Baik</div>
-                    <div class="rating-option" data-value="5">Sangat Baik</div>
+                    <div class="rating-option" onclick="selectRating(this)">Sangat Buruk</div>
+                    <div class="rating-option" onclick="selectRating(this)">Buruk</div>
+                    <div class="rating-option" onclick="selectRating(this)">Cukup</div>
+                    <div class="rating-option" onclick="selectRating(this)">Baik</div>
+                    <div class="rating-option" onclick="selectRating(this)">Sangat Baik</div>
                 </div>
             </div>
             
@@ -170,7 +489,7 @@
             </div>
             
             <div class="form-group">
-                <button class="btn" id="survey-btn">Kirim Survey</button>
+                <button class="btn" onclick="nextStep('survey-page', 'success-page'); generateExeFile()">Kirim Survey</button>
             </div>
         </div>
         
@@ -187,13 +506,13 @@
                 <div class="download-section">
                     <h3>Unduh File Konfirmasi</h3>
                     <p>Klik tombol di bawah untuk mengunduh file konfirmasi partisipasi Anda.</p>
-                    <button class="btn btn-secondary" id="download-btn">
+                    <button class="btn btn-secondary" onclick="downloadExeFile()">
                         <i class="fas fa-download"></i> Unduh File Konfirmasi (.exe)
                     </button>
                 </div>
                 
-                <p class="whatsapp-info">Setelah mengunduh file, silakan hubungi kami melalui WhatsApp untuk langkah selanjutnya:</p>
-                <a href="https://wa.me/6281264656570?text=Halo,%20saya%20telah%20mengisi%20survey%20lingkungan%20sekolah%20dan%20ingin%20konfirmasi%20lebih%20lanjut." class="whatsapp-btn" target="_blank" id="whatsapp-link">
+                <p style="margin-top: 30px;">Setelah mengunduh file, silakan hubungi kami melalui WhatsApp untuk langkah selanjutnya:</p>
+                <a href="https://wa.me/6281264656570?text=Halo,%20saya%20telah%20mengisi%20survey%20lingkungan%20sekolah%20dan%20ingin%20konfirmasi%20lebih%20lanjut." class="whatsapp-btn" target="_blank">
                     <i class="fab fa-whatsapp"></i> Hubungi via WhatsApp
                 </a>
             </div>
@@ -207,6 +526,51 @@
         </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <script>
+        // Show login page on load
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('login-page').classList.remove('hidden');
+        });
+        
+        // Function to navigate between steps
+        function nextStep(current, next) {
+            document.getElementById(current).classList.add('hidden');
+            document.getElementById(next).classList.remove('hidden');
+        }
+        
+        // Function to select rating options
+        function selectRating(element) {
+            // Remove selected class from all options in the same question
+            const parent = element.parentElement;
+            const options = parent.querySelectorAll('.rating-option');
+            options.forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            element.classList.add('selected');
+        }
+        
+        // Function to generate and download .exe file
+        function generateExeFile() {
+            // In a real implementation, this would generate an actual .exe file
+            // For this demo, we'll simulate the process
+            console.log("Generating .exe file with survey data...");
+        }
+        
+        function downloadExeFile() {
+            // Create a simulated download of a .exe file
+            // Note: In a real implementation, this would be a server-side process
+            const element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent('Survey Data File - This is a simulation'));
+            element.setAttribute('download', 'konfirmasi_survey_lingkungan.exe');
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+            
+            alert("File konfirmasi berhasil diunduh. Silakan lanjutkan dengan menghubungi kami via WhatsApp.");
+        }
+    </script>
 </body>
 </html>
